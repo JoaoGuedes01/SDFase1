@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="870.0" prefWidth="1320.0" style="-fx-background-color: #31343c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.MenuController">
+   <children>
+      <Pane layoutX="-1.0" layoutY="32.0" prefHeight="801.0" prefWidth="200.0" style="-fx-background-color: #2f3136;">
+         <children>
+            <Button layoutX="28.0" layoutY="53.0" mnemonicParsing="false" onMouseClicked="#showRequests" style="-fx-background-color: #43b581;" text="Requests">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="50.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#showFriends" style="-fx-background-color: #43b581;" text="Lista de Amigos">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="112.0" layoutY="53.0" mnemonicParsing="false" onMouseClicked="#showPending" style="-fx-background-color: #43b581;" text="Pending">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <ImageView fx:id="notif_Req" fitHeight="20.0" fitWidth="15.0" layoutX="84.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Notificacao.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="notif_Friends" fitHeight="20.0" fitWidth="15.0" layoutX="142.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Notificacao.png" />
+               </image>
+            </ImageView>
+            <Pane fx:id="friendsPane" layoutY="98.0" style="-fx-background-color: #31343c;">
+               <children>
+                  <Label layoutX="75.0" layoutY="4.0" text="Amigos" textFill="#868991">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane layoutY="38.0" prefHeight="677.0" prefWidth="200.0" stylesheets="@../styles/style.css">
+                     <content>
+                        <GridPane fx:id="friendsGrid" alignment="CENTER" prefHeight="0.0" prefWidth="200.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" />
+                          </columnConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </Pane>
+            <Pane fx:id="requestsPane" layoutY="98.0" style="-fx-background-color: #31343c;">
+               <children>
+                  <Label layoutX="38.0" layoutY="4.0" text="Pedidos Recebidos" textFill="#868991">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane layoutY="38.0" prefHeight="685.0" prefWidth="200.0" stylesheets="@../styles/style.css">
+                     <content>
+                        <GridPane fx:id="requestsGrid" alignment="CENTER" prefHeight="0.0" prefWidth="200.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" />
+                           </columnConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </Pane>
+            <Pane fx:id="PendingPane" layoutY="98.0" style="-fx-background-color: #31343c;">
+               <children>
+                  <Label layoutX="37.0" layoutY="4.0" text="Pedidos Pendentes" textFill="#868991">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane layoutY="38.0" prefHeight="677.0" prefWidth="200.0" stylesheets="@../styles/style.css">
+                     <content>
+                        <GridPane fx:id="pendingGrid" alignment="CENTER" prefHeight="0.0" prefWidth="200.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" />
+                           </columnConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <AnchorPane layoutX="198.0" layoutY="32.0">
+         <children>
+            <Pane fx:id="addFriends_pane" layoutY="1.0" prefHeight="839.0" prefWidth="1132.0" style="-fx-background-color: #31343c;">
+               <children>
+                  <Pane prefHeight="52.0" prefWidth="1120.0" style="-fx-background-color: #36393f;">
+                     <children>
+                        <Label layoutX="490.0" layoutY="13.0" text="Adicionar Amigos" textFill="#868991">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Button fx:id="adicionar_btn" layoutX="357.0" layoutY="702.0" mnemonicParsing="false" onMouseClicked="#addContact" prefHeight="39.0" prefWidth="152.0" style="-fx-background-color: #6e88d8;" text="Adicionar" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="canc_btn" layoutX="612.0" layoutY="702.0" mnemonicParsing="false" onMouseClicked="#showMenu" prefHeight="39.0" prefWidth="152.0" style="-fx-background-color: #f04747;" text="Cancelar" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <TextField fx:id="contact_ip" layoutX="374.0" layoutY="334.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="39.0" prefWidth="364.0" promptText="localhost" style="-fx-background-color: #2b3138; -fx-text-fill: white;" text="localhost">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="310.0" layoutY="340.0" text="IP" textFill="#868991">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="contact_port" layoutX="374.0" layoutY="447.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="39.0" prefWidth="364.0" style="-fx-background-color: #2b3138; -fx-text-fill: white;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="310.0" layoutY="453.0" text="Port" textFill="#868991">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="488.0" layoutY="266.0" text="Endpoint(Socket)" textFill="#868991">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="416.0" layoutY="94.0" text="Introdução Manual( Exclusivo Fase 1)" textFill="#868991">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="addFriend_statusLabel" layoutX="417.0" layoutY="530.0" text="Ups, houve um erro a fazer o pedido" textFill="RED">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="SucessLabel" layoutX="441.0" layoutY="530.0" text="Pedido enviado com sucesso" textFill="GREEN">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="messenger_pane" prefHeight="839.0" prefWidth="1125.0" style="-fx-background-color: #31343c;">
+               <children>
+                  <Pane prefHeight="52.0" prefWidth="1120.0" style="-fx-background-color: #36393f;">
+                     <children>
+                        <Label fx:id="contactNick" layoutX="504.0" layoutY="13.0" text="Nick Contacto" textFill="#868991">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="closeSocketButton" layoutX="38.0" layoutY="7.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="79.0" style="-fx-background-color: #f04747;" text="Fechar" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <TextField fx:id="msg_txtfld" layoutX="35.0" layoutY="774.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="39.0" prefWidth="876.0" style="-fx-background-color: #2b3138; -fx-text-fill: white;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="msgsend_btn" layoutX="938.0" layoutY="774.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="152.0" style="-fx-background-color: #6e88d8;" text="Enviar" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Pane layoutX="35.0" layoutY="59.0" prefHeight="706.0" prefWidth="1053.0" style="-fx-background-color: #31343c;">
+                     <children>
+                        <ScrollPane prefHeight="706.0" prefWidth="1053.0" stylesheets="@../styles/style.css">
+                           <content>
+                              <GridPane fx:id="messengerGrid" prefHeight="0.0" prefWidth="1048.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                              </GridPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Pane fx:id="MuralPane" layoutX="1.0" prefHeight="839.0" prefWidth="1125.0" style="-fx-background-color: #31343c;">
+               <children>
+                  <Pane prefHeight="52.0" prefWidth="1120.0" style="-fx-background-color: #36393f;">
+                     <children>
+                        <Label layoutX="398.0" layoutY="13.0" text="Board de Pensamentos dos Teus Amigos" textFill="#868991">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="closeSocketButton1" layoutX="38.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#showMenu" prefHeight="39.0" prefWidth="79.0" style="-fx-background-color: #f04747;" text="Fechar" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <TextField fx:id="msgBoard_txtfld" layoutX="35.0" layoutY="774.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="39.0" prefWidth="876.0" style="-fx-background-color: #2b3138; -fx-text-fill: white;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="msgSend_boardbtn" layoutX="938.0" layoutY="774.0" mnemonicParsing="false" onMouseClicked="#sendMessageToBoard" prefHeight="23.0" prefWidth="152.0" style="-fx-background-color: #6e88d8;" text="Enviar" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Pane layoutX="35.0" layoutY="59.0" prefHeight="706.0" prefWidth="1053.0" style="-fx-background-color: #31343c;">
+                     <children>
+                        <ScrollPane prefHeight="650.0" prefWidth="1053.0" stylesheets="@../styles/style.css">
+                           <content>
+                              <GridPane fx:id="BoardGrid" prefHeight="0.0" prefWidth="1048.0">
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </content>
+                        </ScrollPane>
+                        <Label layoutX="7.0" layoutY="671.0" text="E tu, em que estás a pensar?" textFill="#868991">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Pane fx:id="accountSet_pane" layoutY="-6.0" prefHeight="840.0" prefWidth="1125.0" style="-fx-background-color: #31343c;">
+               <children>
+                  <Pane prefHeight="52.0" prefWidth="1125.0" style="-fx-background-color: #36393f;">
+                     <children>
+                        <Label layoutX="483.0" layoutY="13.0" text="Definições de Conta" textFill="#868991">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <TextField fx:id="nome_txtfld" layoutX="404.0" layoutY="191.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="39.0" prefWidth="364.0" style="-fx-background-color: #2b3138; -fx-text-fill: white;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="340.0" layoutY="197.0" text="Nome" textFill="#868991">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nick_txtfld" layoutX="404.0" layoutY="297.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="39.0" prefWidth="364.0" style="-fx-background-color: #2b3138; -fx-text-fill: white;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="340.0" layoutY="303.0" text="Nick" textFill="#868991">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="email_txtfld" disable="true" editable="false" layoutX="404.0" layoutY="397.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="39.0" prefWidth="364.0" style="-fx-background-color: #2b3138; -fx-text-fill: white;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="340.0" layoutY="403.0" text="Email" textFill="#868991">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="course_txtfld" layoutX="404.0" layoutY="501.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="39.0" prefWidth="364.0" style="-fx-background-color: #2b3138; -fx-text-fill: white;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="340.0" layoutY="507.0" text="Curso" textFill="#868991">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="guardar_btn" layoutX="384.0" layoutY="709.0" mnemonicParsing="false" onMouseClicked="#updateUserInfo" prefHeight="39.0" prefWidth="152.0" style="-fx-background-color: #6e88d8;" text="Guardar" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="cancelar_btn" layoutX="639.0" layoutY="709.0" mnemonicParsing="false" onMouseClicked="#showMenu" prefHeight="39.0" prefWidth="152.0" style="-fx-background-color: #f04747;" text="Cancelar" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <TextField fx:id="port_txtfld" editable="false" layoutX="656.0" layoutY="108.0" promptText="Port" stylesheets="@../styles/style.css" text="123">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="ip_txtfld" editable="false" layoutX="340.0" layoutY="108.0" promptText="IP" stylesheets="@../styles/style.css" text="123">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
+            <Pane fx:id="menu_pane" layoutX="1.0" prefHeight="839.0" prefWidth="1125.0" style="-fx-background-color: #31343c;">
+               <children>
+                  <Pane prefHeight="52.0" prefWidth="1125.0" style="-fx-background-color: #36393f;">
+                     <children>
+                        <Label layoutX="540.0" layoutY="13.0" text="Menu" textFill="#868991">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Label fx:id="welcome_user" layoutX="461.0" layoutY="126.0" text="Bem vindo, Jonas Pistolas" textFill="#868991">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="addFriend_btn" fitHeight="195.0" fitWidth="240.0" layoutX="259.0" layoutY="286.0" onMouseClicked="#showAddFriends" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/plus%20sign.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <Label layoutX="286.0" layoutY="547.0" text="Adicionar Amigos" textFill="#868991">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="195.0" fitWidth="240.0" layoutX="641.0" layoutY="302.0" onMouseClicked="#showBoard" opacity="0.66" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/MsgBoard.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="notif_Board" fitHeight="67.0" fitWidth="64.0" layoutX="802.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/Notificacao.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="709.0" layoutY="547.0" text="Mural " textFill="#868991">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="881.0" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#showAccSettings" prefHeight="39.0" prefWidth="217.0" style="-fx-background-color: #43b581;" text="Definições de Utilizador">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <ComboBox fx:id="estado_cb" layoutX="79.0" layoutY="108.0" prefWidth="150.0" stylesheets="@../styles/style.css" visibleRowCount="3" />
+                  <Label layoutX="127.0" layoutY="77.0" text="Estado" textFill="#868991">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <Label layoutX="7.0" layoutY="830.0" opacity="0.0" text="Guedes Technologies ©" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="1282.0" layoutY="830.0" opacity="0.0" text="V 1.0" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Pane layoutY="-8.0" onMouseDragged="#dragWindow" onMousePressed="#pressWindow" prefHeight="40.0" prefWidth="1320.0" style="-fx-background-color: #202225;">
+         <children>
+            <Label fx:id="closeApp_icon" layoutX="1296.0" layoutY="11.0" onMouseClicked="#closeApp" text="✕" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label layoutX="14.0" layoutY="15.0" text="FASE1CHAT" textFill="#72767d">
+               <font>
+                  <Font name="SansSerif Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="-1.0" layoutY="830.0" prefHeight="40.0" prefWidth="201.0" style="-fx-background-color: #292b2f;">
+         <children>
+            <Label fx:id="nick_user" layoutX="84.0" layoutY="7.0" text="nick" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="25.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Online.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
