@@ -93,7 +93,7 @@ public class MenuController implements Initializable {
     private Pane messenger_pane, friendsPane, requestsPane, PendingPane;
 
     @FXML
-    private Label contactNick;
+    private Label contactNick, offlineLabel;
 
     @FXML
     private Button msgsend_btn, closeSocketButton;
@@ -103,15 +103,18 @@ public class MenuController implements Initializable {
 
     @FXML
     private Pane MuralPane;
-    
+
     @FXML
-    private TextField ip_txtfld,port_txtfld;
-    
+    private TextField ip_txtfld, port_txtfld;
+
     @FXML
-    private Label addFriend_statusLabel,SucessLabel;
-    
+    private Label addFriend_statusLabel, SucessLabel;
+
     @FXML
-    private ImageView notif_Req,notif_Friends,notif_Board;
+    private ImageView notif_Req, notif_Friends, notif_Board;
+
+    @FXML
+    private Label BoardStatus;
 
     private static MenuController instance;
 
@@ -155,34 +158,39 @@ public class MenuController implements Initializable {
     public static MenuController getInstance() {
         return instance;
     }
-    
+
     @FXML
-    public void notifyReq(){
+    public Label isBoardOn() {
+        return BoardStatus;
+    }
+
+    @FXML
+    public void notifyReq() {
         notif_Req.setOpacity(1);
     }
-    
+
     @FXML
-    public void notifyFriends(){
+    public void notifyFriends() {
         notif_Friends.setOpacity(1);
     }
-    
+
     @FXML
-    public void notifyBoard(){
+    public void notifyBoard() {
         notif_Board.setOpacity(1);
     }
-    
+
     @FXML
-    public void clearNotifyReq(){
+    public void clearNotifyReq() {
         notif_Req.setOpacity(0);
     }
-    
+
     @FXML
-    public void clearNotifyFriends(){
+    public void clearNotifyFriends() {
         notif_Friends.setOpacity(0);
     }
-    
+
     @FXML
-    public void clearNotifyBoard(){
+    public void clearNotifyBoard() {
         notif_Board.setOpacity(0);
     }
 
@@ -265,6 +273,7 @@ public class MenuController implements Initializable {
                         System.out.println("Abrindo um socket para " + contact.getNick());
                         contactNick.setText(contact.getNick());
                         messengerGrid.getChildren().clear();
+                        offlineLabel.setOpacity(0);
                         messenger_pane.toFront();
                         if (contact.getMessageList().size() > 0) {
                             for (int i2 = 0; i2 < contact.getMessageList().size(); i2++) {
@@ -287,14 +296,22 @@ public class MenuController implements Initializable {
                         System.out.println(messengerGrid.getChildren().size());
                         msgsend_btn.setOnMouseClicked(eventSendMsg -> {
                             try {
-                                Message message = new Message("privateMessage", msg_txtfld.getText(), sys.getUserLogado());
-                                out.writeObject(message);
-                                System.out.println("Mensagem enviada");
-                                contact.getMessageList().add(message);
+                                if (offlineLabel.getText().equals("offline")) {
+                                    Message message = new Message("privateMessage", "USER OFFLINE", sys.getUserLogado());
+                                    addMsgToScreenYou(message);
+                                    msg_txtfld.clear();
+                                } else {
+                                    Message message = new Message("privateMessage", msg_txtfld.getText(), sys.getUserLogado());
+                                    out.writeObject(message);
+                                    contact.getMessageList().add(message);
+                                    addMsgToScreenYou(message);
+                                    msg_txtfld.clear();
+                                }
+                            } catch (Exception e) {
+                                System.out.println("User offline");
+                                Message message = new Message("privateMessage", "USER OFFLINE", sys.getUserLogado());
                                 addMsgToScreenYou(message);
                                 msg_txtfld.clear();
-                            } catch (Exception e) {
-                                e.printStackTrace();
                             }
 
                         });
@@ -305,13 +322,15 @@ public class MenuController implements Initializable {
                                 System.out.println("Socket Fechado");
                                 menu_pane.toFront();
                                 contactNick.setText("");
+
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                System.out.println("User offline");
+                                menu_pane.toFront();
                             }
                         });
 
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        offlineLabel.setOpacity(1);
                     }
 
                 });
@@ -448,6 +467,7 @@ public class MenuController implements Initializable {
     //Mostrar diferentes paineis no Menu
     @FXML
     private void showMenu() {
+        BoardStatus.setText("off");
         menu_pane.toFront();
     }
 
@@ -482,12 +502,16 @@ public class MenuController implements Initializable {
             addMsgToBoard(message);
             msgBoard_txtfld.clear();
         } catch (Exception e) {
-            e.printStackTrace();
+            Message message = new Message("msgBoard", msgBoard_txtfld.getText(), sys.getUserLogado());
+            addMsgToBoard(message);
+            msgBoard_txtfld.clear();
         }
     }
 
     @FXML
     private void addContact() {
+        addFriend_statusLabel.setOpacity(0);
+        SucessLabel.setOpacity(0);
 
         try {
             InetAddress destIP = InetAddress.getByName(contact_ip.getText());
@@ -503,7 +527,6 @@ public class MenuController implements Initializable {
             out.flush();
             SucessLabel.setOpacity(1);
 
-
             //Recebe o objeto User a quem foi enviado o pedido
             User usr = (User) in.readObject();
             client.close();
@@ -518,7 +541,7 @@ public class MenuController implements Initializable {
             }
 
         } catch (Exception e) {
-                    addFriend_statusLabel.setOpacity(1);
+            addFriend_statusLabel.setOpacity(1);
             e.printStackTrace();
         }
     }
@@ -550,6 +573,7 @@ public class MenuController implements Initializable {
 
     @FXML
     private void showBoard() {
+        BoardStatus.setText("on");
         clearNotifyBoard();
         MuralPane.toFront();
     }

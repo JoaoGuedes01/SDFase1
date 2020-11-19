@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -22,6 +24,11 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                  </Label>
+                  <Label layoutX="32.0" layoutY="15.0" text="GUEDESCHAT" textFill="#72767d">
+                     <font>
+                        <Font name="SansSerif Bold" size="20.0" />
+                     </font>
                   </Label>
                </children>
             </Pane>
@@ -96,6 +103,16 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <ImageView fitHeight="310.0" fitWidth="245.0" layoutX="33.0" layoutY="143.0" opacity="0.02" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/guedesCara.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="310.0" fitWidth="245.0" layoutX="799.0" layoutY="137.0" opacity="0.02" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/guedesCara.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

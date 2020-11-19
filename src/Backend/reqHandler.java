@@ -46,7 +46,7 @@ public class reqHandler extends Thread {
 
     @Override
     public void run() {
-
+        
         try {
             Message msg = (Message) in.readObject();
             User usr = (User) msg.getUser();
@@ -132,10 +132,17 @@ public class reqHandler extends Thread {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            System.out.println("Mensagem de Board Recebida");
-                            MenuController.getInstance().addMsgToBoard(msg);
-                            System.out.println(msg.getMessage());
-                            MenuController.getInstance().notifyBoard();
+                            if (MenuController.getInstance().isBoardOn().getText().equals("on")) {
+                                System.out.println("Mensagem de Board Recebida");
+                                MenuController.getInstance().addMsgToBoard(msg);
+                                System.out.println(msg.getMessage());
+                            } else {
+                                MenuController.getInstance().notifyBoard();
+                                System.out.println("Mensagem de Board Recebida");
+                                MenuController.getInstance().addMsgToBoard(msg);
+                                System.out.println(msg.getMessage());
+                            }
+
                         }
                     });
                     break;

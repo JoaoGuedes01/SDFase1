@@ -16,7 +16,7 @@
     <jar href="lib\javafx.media.jar" size="270594" download="eager" />
     <jar href="lib\javafx.swing.jar" size="119848" download="eager" />
     <jar href="lib\javafx.web.jar" size="714741" download="eager" />
-    <jar href="projeto1.jar" size="122633" download="eager" />
+    <jar href="projeto1.jar" size="217101" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="Backend.App"  name="projeto1" />
   <update check="always"/>
